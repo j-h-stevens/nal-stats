@@ -1,4 +1,7 @@
 # nal-stats
+[![codecov](https://codecov.io/gh/j-h-stevens/nal-stats/branch/main/graph/badge.svg?token=YOUR_TOKEN)](https://codecov.io/gh/j-h-stevens/nal-stats)
+[![Coverage Status](https://coveralls.io/repos/github/j-h-stevens/nal-stats/badge.svg?branch=main)](https://coveralls.io/github/j-h-stevens/nal-stats?branch=main)
+
 ```markdown
 
 nal-stats is a Rust package that provides basic support for statistics. Particularly, it implements a variety of statistics-related functions, such as scalar statistics, high-order moment comptation, counting, ranking, covarinces, sample. and empirical density estimation. 
