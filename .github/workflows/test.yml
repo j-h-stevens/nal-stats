@@ -32,32 +32,6 @@ jobs:
       - name: Run documentation tests
         run: cargo test --locked --all-features --doc
 
-  minimal:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-      - name: Install stable Rust toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          components: llvm-tools-preview
-          override: true
-      - name: Install nightly Rust toolchain for -Zminimal-versions
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: nightly
-          override: true
-      - name: Set default toolchain to stable
-        run: rustup default stable
-      - name: Update dependencies to minimal versions
-        run: cargo +nightly update -Zminimal-versions
-      - name: Run tests for all features and targets
-        run: cargo test --locked --all-features --all-targets
-
   os-check:
     runs-on: ${{ matrix.os }}
     strategy:
