@@ -12,7 +12,13 @@ nalgebra="0.32.3"
 criterion = "0.5.1"
 
 [[bench]]
-name = "benchmarks"
+name = "cor2"
+path = "benches/cor2.rs"
+harness = false
+
+[[bench]]
+name = "round"
+path = "benches/round.rs"
 harness = false
 
 [lib]
