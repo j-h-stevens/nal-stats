@@ -1,5 +1,6 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use nal_stats::Cor2cov;
+use nal_stats::Cor2Chol;
+use nal_stats::Cor2Cov;
 use nalgebra::{DMatrix, DVector}; // Replace `your_crate_name` with the name of your crate
 
 fn cor2cov_benchmark(c: &mut Criterion) {
@@ -21,5 +22,13 @@ fn cor2cov_benchmark(c: &mut Criterion) {
     group.finish();
 }
 
-criterion_group!(benches, cor2cov_benchmark);
+fn benchmark_cor2chol_u(c: &mut Criterion) {
+    c.bench_function("cor2chol_u 100x100", |b| {
+        let cor = DMatrix::<f64>::identity(100, 100);
+        let std_dev = DVector::<f64>::from_element(100, 1.0);
+        b.iter(|| cor.cor2chol_u(black_box(&std_dev)));
+    });
+}
+
+criterion_group!(benches, cor2cov_benchmark, benchmark_cor2chol_u);
 criterion_main!(benches);

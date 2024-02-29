@@ -1,6 +1,6 @@
-use nalgebra::{DMatrix, DVector};
+use nalgebra::{Cholesky, DMatrix, DVector};
 
-pub trait Cor2cov {
+pub trait Cor2Cov {
     // In-place cor2cov
     fn cor2cov_(&mut self, s: &DVector<f64>);
 
@@ -8,7 +8,7 @@ pub trait Cor2cov {
     fn cor2cov(&self, s: &DVector<f64>) -> Self;
 }
 
-impl Cor2cov for DMatrix<f64> {
+impl Cor2Cov for DMatrix<f64> {
     ///Mutable implementation
     fn cor2cov_(&mut self, s: &DVector<f64>) {
         let n = self.shape();
@@ -27,5 +27,17 @@ impl Cor2cov for DMatrix<f64> {
         let mut result = self.clone();
         result.cor2cov_(s);
         result
+    }
+}
+
+pub trait Cor2Chol {
+    fn cor2chol_u(&self, s: &DVector<f64>) -> Result<DMatrix<f64>, &'static str>;
+}
+
+impl Cor2Chol for DMatrix<f64> {
+    fn cor2chol_u(&self, s: &DVector<f64>) -> Result<DMatrix<f64>, &'static str> {
+        let cov = self.cor2cov(s);
+        let chol = Cholesky::new(cov).expect("Matrix is not positive-definite");
+        Ok(chol.l().transpose())
     }
 }
