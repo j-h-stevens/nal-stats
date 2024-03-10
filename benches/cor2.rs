@@ -1,6 +1,5 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use nal_stats::Cor2Chol;
-use nal_stats::Cor2Cov;
+use nal_stats::Cor2;
 use nalgebra::{DMatrix, DVector}; // Replace `your_crate_name` with the name of your crate
 
 fn cor2cov_benchmark(c: &mut Criterion) {

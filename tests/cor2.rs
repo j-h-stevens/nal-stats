@@ -1,5 +1,4 @@
-use nal_stats::Cor2Chol;
-use nal_stats::Cor2Cov;
+use nal_stats::Cor2;
 #[cfg(test)]
 mod cor2cov {
     use super::*;
