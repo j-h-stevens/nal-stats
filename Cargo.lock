@@ -291,7 +291,6 @@ dependencies = [
  "nalgebra",
  "rand",
  "rand_distr",
- "rayon",
 ]
 
 [[package]]

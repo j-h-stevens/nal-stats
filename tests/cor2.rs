@@ -39,18 +39,6 @@ mod cor2chol {
     use nalgebra::{dmatrix, dvector, DMatrix, DVector};
 
     #[test]
-    fn test_valid_correlation_matrix() {
-        let cor = dmatrix![
-            1.0, 0.5;
-            0.5, 1.0
-        ];
-        let std_dev = dvector![1.0, 2.0];
-        let chol_result = cor.cor2chol_u(&std_dev);
-        assert!(chol_result.is_ok());
-        // Additional checks can be added to verify the contents of the result
-    }
-
-    #[test]
     #[should_panic(expected = "Matrix is not positive-definite")]
     fn test_invalid_correlation_matrix() {
         let cor = dmatrix![
@@ -58,7 +46,7 @@ mod cor2chol {
             2.0, 1.0
         ];
         let std_dev = dvector![1.0, 1.0];
-        cor.cor2chol_u(&std_dev).unwrap();
+        cor.cor2chol_u(&std_dev);
     }
 
     #[test]
@@ -66,19 +54,16 @@ mod cor2chol {
         let cor = DMatrix::<f64>::zeros(0, 0);
         let std_dev = DVector::<f64>::zeros(0);
         let result = cor.cor2chol_u(&std_dev);
-        assert!(result.is_ok());
 
-        // Use `as_ref` to borrow the result for inspection without consuming it
-        let unwrapped_result = result.as_ref().unwrap();
-        assert_eq!(unwrapped_result.ncols(), 0);
-        assert_eq!(unwrapped_result.nrows(), 0);
+        assert_eq!(result.ncols(), 0);
+        assert_eq!(result.nrows(), 0);
     }
 
     #[test]
     fn test_single_element_matrix() {
         let cor = dmatrix![1.0];
         let std_dev = dvector![1.0];
-        let result = cor.cor2chol_u(&std_dev).unwrap();
+        let result = cor.cor2chol_u(&std_dev);
         assert_eq!(result, dmatrix![1.0]);
     }
 
@@ -90,6 +75,6 @@ mod cor2chol {
             0.5, 1.0
         ];
         let std_dev = dvector![1.0];
-        cor.cor2chol_u(&std_dev).unwrap();
+        cor.cor2chol_u(&std_dev);
     }
 }

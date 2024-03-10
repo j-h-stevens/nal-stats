@@ -8,7 +8,7 @@ pub trait Cor2 {
     fn cor2cov(&self, s: &DVector<f64>) -> Self;
 
     // Calculate upper triangular Cholesky decomposition
-    fn cor2chol_u(&self, s: &DVector<f64>) -> Result<DMatrix<f64>, &'static str>;
+    fn cor2chol_u(&self, s: &DVector<f64>) -> DMatrix<f64>;
 }
 
 impl Cor2 for DMatrix<f64> {
@@ -31,9 +31,9 @@ impl Cor2 for DMatrix<f64> {
         result.cor2cov_(s);
         result
     }
-    fn cor2chol_u(&self, s: &DVector<f64>) -> Result<DMatrix<f64>, &'static str> {
+    fn cor2chol_u(&self, s: &DVector<f64>) -> DMatrix<f64> {
         let cov = self.cor2cov(s);
         let chol = Cholesky::new(cov).expect("Matrix is not positive-definite");
-        Ok(chol.l().transpose())
+        chol.l().transpose()
     }
 }
