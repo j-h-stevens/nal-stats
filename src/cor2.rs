@@ -12,7 +12,14 @@ pub trait Cor2 {
 }
 
 impl Cor2 for DMatrix<f64> {
-    ///Mutable implementation
+    /// Converts the correlation matrix in-place to a covariance matrix using standard deviations.
+    /// # Example
+    /// ```
+    /// let mut matrix = DMatrix::from_diagonal(&DVector::from_vec(vec![1.0, 0.5, 0.5]));
+    /// let scale = DVector::from_vec(vec![2.0, 3.0, 4.0]);
+    /// matrix.cor2cov_(&scale);
+    /// ```
+    #[inline]
     fn cor2cov_(&mut self, s: &DVector<f64>) {
         let n = self.shape();
         if n.0 != s.len() || n.1 != s.len() {
@@ -25,12 +32,27 @@ impl Cor2 for DMatrix<f64> {
             }
         }
     }
-    ///Copy implementation
+    /// Converts the correlation matrix to a covariance matrix using standard deviations, returning a new matrix.
+    /// # Example
+    /// ```
+    /// let matrix = DMatrix::from_diagonal(&DVector::from_vec(vec![1.0, 0.5, 0.5]));
+    /// let scale = DVector::from_vec(vec![2.0, 3.0, 4.0]);
+    /// let result = matrix.cor2cov(&scale); // Returns a new matrix
+    /// ```
+    #[inline]
     fn cor2cov(&self, s: &DVector<f64>) -> Self {
         let mut result = self.clone();
         result.cor2cov_(s);
         result
     }
+    /// Computes the upper triangular Cholesky decomposition of the correlation matrix converted to a covariance matrix.
+    /// # Example
+    /// ```
+    /// let cor = DMatrix::from_diagonal(&DVector::from_vec(vec![1.0, 0.5, 0.5]));
+    /// let std_dev = DVector::from_vec(vec![2.0, 3.0, 4.0]);
+    /// let chol_u = cor.cor2chol_u(&std_dev); // Returns upper triangular Cholesky decomposition
+    /// ```
+    #[inline]
     fn cor2chol_u(&self, s: &DVector<f64>) -> DMatrix<f64> {
         let cov = self.cor2cov(s);
         let chol = Cholesky::new(cov).expect("Matrix is not positive-definite");

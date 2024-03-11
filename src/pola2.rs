@@ -2,7 +2,7 @@ use nalgebra::{DMatrix, Scalar};
 use num_traits::NumCast;
 use polars::datatypes::DataType::*;
 use polars::prelude::*;
-
+/// Converts Polars DataFrames to nalgebra matrices (`DMatrix<N>`).
 pub trait Df2Nal {
     fn to_nal_mat<N>(&self) -> PolarsResult<DMatrix<N>>
     where
@@ -10,10 +10,20 @@ pub trait Df2Nal {
 }
 
 impl Df2Nal for DataFrame {
+    #[inline]
     fn to_nal_mat<N>(&self) -> PolarsResult<DMatrix<N>>
     where
         N: Scalar + NumCast,
     {
+        // Converts the DataFrame to a nalgebra matrix of type `N`.
+        // # Errors
+        // Returns an error if the DataFrame is empty, contains non-numeric or non-boolean columns, or if conversion fails.
+        // Example usage:
+        // ```
+        // let df = df!["a" => [1.0, 2.0, 3.0], "b" => [4.0, 5.0, 6.0]].unwrap();
+        // let matrix_result = df.to_nal_mat::<f64>().unwrap();
+        // let expected = DMatrix::<f64>::from_row_slice(3, 2, &[1.0, 4.0, 2.0, 5.0, 3.0, 6.0]);
+        // assert_eq!(matrix_result, expected)
         let columns = self.get_columns();
         let nrows = self.height();
         let ncols = columns.len();
@@ -64,6 +74,7 @@ where
     T: PolarsNumericType,
     T::Native: Scalar + num_traits::NumCast,
 {
+    #[inline]
     fn to_nal_vec(&self) -> PolarsResult<DMatrix<T::Native>> {
         let slice = self.cont_slice()?;
         let data: Vec<T::Native> = slice.to_vec();
@@ -78,6 +89,7 @@ pub trait ListChunk2Nal {
 }
 
 impl ListChunk2Nal for ListChunked {
+    #[inline]
     fn to_nal_mat<N>(&self) -> PolarsResult<DMatrix<N>>
     where
         N: PolarsNumericType + Scalar + num_traits::NumCast,
