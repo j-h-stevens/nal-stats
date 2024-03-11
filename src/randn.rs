@@ -12,6 +12,8 @@ impl Randn for DVector<f64> {
     /// Generates a vector with random numbers.
     /// # Example
     /// ```
+    /// use nalgebra::DVector;
+    /// use nal_stats::Randn;
     /// let seed = 1234;
     /// let size = 1000; // Size of the vector
     /// let vector: DVector<f64> = DVector::randn(seed, size);
@@ -29,6 +31,8 @@ impl Randn for DMatrix<f64> {
     /// Generates a matrix with random numbers.
     /// # Example
     /// ```
+    /// use nalgebra::DMatrix;
+    /// use nal_stats::Randn;
     /// let seed = 1234;
     /// let dimensions = (50, 100); // 50 rows, 100 columns
     /// let matrix: DMatrix<f64> = DMatrix::randn(seed, dimensions);
@@ -47,6 +51,8 @@ impl Randn for Vec<DMatrix<f64>> {
     /// Generates a vector of matrices with random numbers.
     /// # Example
     /// ```
+    /// use nalgebra::DMatrix;
+    /// use nal_stats::Randn;
     /// let seed = 1234;
     /// let dimensions = (10, 5, 100); // 10 rows, 5 columns, 100 matrices
     /// let matrices: Vec<DMatrix<f64>> = Vec::<DMatrix<f64>>::randn(seed, dimensions);

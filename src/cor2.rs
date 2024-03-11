@@ -15,6 +15,8 @@ impl Cor2 for DMatrix<f64> {
     /// Converts the correlation matrix in-place to a covariance matrix using standard deviations.
     /// # Example
     /// ```
+    /// use nalgebra::{DMatrix, DVector};
+    /// use nal_stats::Cor2;
     /// let mut matrix = DMatrix::from_diagonal(&DVector::from_vec(vec![1.0, 0.5, 0.5]));
     /// let scale = DVector::from_vec(vec![2.0, 3.0, 4.0]);
     /// matrix.cor2cov_(&scale);
@@ -35,6 +37,8 @@ impl Cor2 for DMatrix<f64> {
     /// Converts the correlation matrix to a covariance matrix using standard deviations, returning a new matrix.
     /// # Example
     /// ```
+    /// use nalgebra::{DMatrix, DVector};
+    /// use nal_stats::Cor2;
     /// let matrix = DMatrix::from_diagonal(&DVector::from_vec(vec![1.0, 0.5, 0.5]));
     /// let scale = DVector::from_vec(vec![2.0, 3.0, 4.0]);
     /// let result = matrix.cor2cov(&scale); // Returns a new matrix
@@ -48,6 +52,8 @@ impl Cor2 for DMatrix<f64> {
     /// Computes the upper triangular Cholesky decomposition of the correlation matrix converted to a covariance matrix.
     /// # Example
     /// ```
+    /// use nalgebra::{DMatrix, DVector};
+    /// use nal_stats::Cor2;
     /// let cor = DMatrix::from_diagonal(&DVector::from_vec(vec![1.0, 0.5, 0.5]));
     /// let std_dev = DVector::from_vec(vec![2.0, 3.0, 4.0]);
     /// let chol_u = cor.cor2chol_u(&std_dev); // Returns upper triangular Cholesky decomposition

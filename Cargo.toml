@@ -31,4 +31,4 @@ path = "benches/randn.rs"
 harness = false
 
 [lib]
-doctest = false
+doctest = true

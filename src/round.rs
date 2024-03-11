@@ -11,6 +11,8 @@ pub trait Round {
 impl Round for DVector<f64> {
     /// # Example
     /// ```
+    /// use nalgebra::DVector;
+    /// use nal_stats::Round;
     ///let mut v = DVector::from_vec(vec![123.456, 78.9, 0.12345]);
     ///v.round_(2);
     ///assert_eq!(v, DVector::from_vec(vec![123.46, 78.90, 0.12]));
@@ -24,6 +26,8 @@ impl Round for DVector<f64> {
     }
     /// # Example
     /// ```
+    /// use nalgebra::DVector;
+    /// use nal_stats::Round;
     ///let mut v = DVector::from_vec(vec![123.456, 78.9, 0.12345]);
     ///let rounded = v.round(1);
     /// assert_eq!(rounded, DVector::from_vec(vec![123.5, 78.9, 0.1]));
@@ -39,6 +43,8 @@ impl Round for DVector<f64> {
 impl Round for DMatrix<f64> {
     /// # Example
     /// ```
+    /// use nalgebra::DMatrix;
+    /// use nal_stats::Round;
     /// let mut m = DMatrix::from_row_slice(2, 2, &[123.456, 78.9, 0.12345, 456.789]);
     /// m.round_(3);
     /// assert_eq!(m, DMatrix::from_row_slice(2, 2, &[123.456, 78.900, 0.123, 456.789]));
@@ -54,6 +60,8 @@ impl Round for DMatrix<f64> {
     }
     /// # Example
     /// ```
+    /// use nalgebra::DMatrix;
+    /// use nal_stats::Round;
     /// let mut m = DMatrix::from_row_slice(2, 2, &[123.456, 78.9, 0.12345, 456.789]);
     /// let rounded = m.round(1);
     /// assert_eq!(rounded, DMatrix::from_row_slice(2, 2, &[123.5, 78.9, 0.1, 456.8]));

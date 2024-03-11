@@ -20,6 +20,8 @@ impl Df2Nal for DataFrame {
         // Returns an error if the DataFrame is empty, contains non-numeric or non-boolean columns, or if conversion fails.
         // Example usage:
         // ```
+        // use polars::prelude::*;
+        // use nal_stats::pola2::Df2Nal;
         // let df = df!["a" => [1.0, 2.0, 3.0], "b" => [4.0, 5.0, 6.0]].unwrap();
         // let matrix_result = df.to_nal_mat::<f64>().unwrap();
         // let expected = DMatrix::<f64>::from_row_slice(3, 2, &[1.0, 4.0, 2.0, 5.0, 3.0, 6.0]);
