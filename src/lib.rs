@@ -31,6 +31,3 @@ pub use cor2::Cor2;
 
 pub mod randn;
 pub use randn::Randn;
-
-pub mod pola2;
-pub use pola2::{ChunkArr2Nal, Df2Nal, ListChunk2Nal};

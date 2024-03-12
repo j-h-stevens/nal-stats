@@ -80,5 +80,6 @@ jobs:
         with:
           fail_ci_if_error: true
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: j-h-stevens/nal-pola
           files: lcov.info
           name: codecov-umbrella
