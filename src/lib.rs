@@ -31,3 +31,6 @@ pub use cor2::Cor2;
 
 pub mod randn;
 pub use randn::Randn;
+
+pub mod cov;
+pub use cov::Stats;
