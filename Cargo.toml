@@ -9,7 +9,6 @@ edition = "2021"
 rand_distr = "0.4.3"
 rand = { version = "0.8.5", features = ["small_rng"] } 
 nalgebra = "0.32.4"
-polars = "0.38.2"
 num-traits = "0.2.18"
 
 [dev-dependencies]
